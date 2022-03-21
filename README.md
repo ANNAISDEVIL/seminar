@@ -30,7 +30,8 @@ Unterscheidet sich der Effekt von weißem Rauschen auf die wahrgenommene Bildqua
 ## 1.1. Hypothese
 
 Um den Detailgrad zu definieren, haben wir zwei Forschungslinien verfolgt: In eine Richtung, Detailgrad verringert sich durch Anime-Konvertierung. Darüber haben wir vermutet, Die Bewertung des Anime ist höher als das Originalbild unter dem gleichen Rauschen im Liniendiagramm jeder Gruppe. In ein andere Richtung, ein Bild kann weniger Details enthalten. Mit anderen Worten, jedes Bild hat einen anderen Detailgrad. Und wir denken, die Bewertung der Gruppe mit einem hohen Detailgrad bei gleichem Rauschlevel schlechter als eine Gruppe mit einem geringen Detailgrad ist. Weil je mehr Details die Originalbilder haben, desto mehr Details gehen bei der Konvertierung verloren, daraus folgt eine schlechter Bewertung.
-![](https://s2.loli.net/2022/03/19/N41M3QogUfZwFXk.png)
+![](https://s2.loli.net/2022/03/22/y6cz5NOHRFDnVdY.png)
+
 
 ## 2. Versuchsplan
 
@@ -47,8 +48,13 @@ Wahrgenommene Bildqualität
 - Also insgesamt 360 Durchgänge
 
 ### 2.2 Vorbereitung
-Wir wählen Originalbilder mit unterschiedlichen Anzahl von Einzelheiten aus und wandeln sie in Animation um. Nach der Gruppenverteilung merken wir uns, dass die Bilder in einer Gruppe sind, sich in einem bestimmten Bereich von Dateigrößen liegen.
+Wir wählen Originalbilder mit unterschiedlichen Anzahl von Einzelheiten aus und wandeln sie in Animation um. Nach der Gruppenverteilung merken wir uns, dass die Bilder in einer Gruppe sind, sich in einem bestimmten Bereich von Dateigrößen liegen. Deshalb haben wir die Bilder in 3 Gruppen eingeteilt:
 
+Gruppe 1: Fotos mit vielen Details (Datei größer als 500 kb)
+Gruppe 2: Fotos mit mittleren Details (Datei zwischen 300 kb und 418 kb)
+Gruppe 3: Fotos mit nur wenigen Details (Datei kleiner als 187 kb)
+
+![](https://s2.loli.net/2022/03/22/oF17wYDA8iWgVrf.png)
 
 
 ```python
@@ -59,8 +65,11 @@ Wir wählen Originalbilder mit unterschiedlichen Anzahl von Einzelheiten aus und
 
 ## 3. Ergebnisse
 
-Die folgende Abbildung zeigt die Wahrnehmungsskalen für unsere Stimuli und zwei Beobachter (der Autor und ein naiver Teilnehmer). Wir haben das Maximum der Skala in Anlehnung an Charrier et al. (2007) auf eins normiert.
-Die Skalen der beiden Beobachter weisen geringfügige Unterschiede auf. Für beide Beobachter ist aber festzustellen, dass der Effekt der Komprimierung in dem natürlichen (Einstein) Gesicht eher bemerkt wird als in dem abstrakten Gesicht (Picasso). Der Wendepunkt der Skala für Einstein ist bei einem niedrigeren Komprimierungswert als der der Skala bei Picassos Bild. 
+Die folgende Abbildung zeigt die Wahrnehmungsskalen für unsere Stimuli.
+
+Für verschiedenen Bildtype weisen die Skalen der Beobachte geringfügige Unterschiede auf. Und egal für welche Versuchspersonen ist festzustellen, dass die Bewertungen für Anime und Original sind bei jedem noise level sehr ähnlich, der Effekt der anive-Konvertierung auf die Rauschwirkung nicht einfach zu bemerken werden kann.
+
+Für verschiedenen Bilddetailgrad weisen die Skalen der Beobachte aber größere Unterschiede auf. Wir haben festgestellt, dass verschiedene Gruppen unterschiedlich bewertet werden. Die Bilder mit höhere Detailgrad besitzen auch bessere Bewertung. Damit wirkt die Detailsgrad im Bild sich selbst auf den Rauscheffekt aus.
 
 
 ```python
