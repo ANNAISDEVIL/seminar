@@ -39,8 +39,7 @@ Um den Detailgrad zu definieren, haben wir zwei Forschungslinien verfolgt: In ei
 **Abhängig Variablen:**
 Wahrgenommene Bildqualität 
 - Für jedes Bild 12 verschiedene Formen -> 6 aus dem Originalbild und 6 aus dem Anime-Bild
-- Für jede Gruppe haben wir 10 Bildern -> $3*10*12=360$
-- Also insgesamt 360 Durchgänge
+- Für jede Gruppe haben wir 10 Bildern -> 3 mal 10 mal 12 gleich 360 Durchgänge
 
 ### 2.2 Vorbereitung
 Um den Unterschied zwischen dem Originalbild und dem Anime-Bild nach AnimeGAN zu quantifizieren, haben wir den mittleren quadratischen Fehler (MSE) zwischen dem Originalbild und dem Anime-Bild berechnet.Die beiden folgenden Bilder haben beispielsweise einen MSE-Wert von 100,68:
@@ -57,7 +56,7 @@ im_anime = np.array(anime)
 def mse(im1, im2):
     N = im_original.size 
     return (1.0/N)*np.sum((im1 - im2)**2)
-print('MSE', mse(im_original, im_anime))
+
 plt.figure()
 plt.subplot(1,2,1)
 plt.axis('off')
@@ -65,14 +64,11 @@ plt.imshow(im_original)
 plt.subplot(1,2,2)
 plt.axis('off')
 plt.imshow(im_anime)
+print('MSE', mse(im_original, im_anime))
 ```
 
-
-
-
-    <matplotlib.image.AxesImage at 0x1c4c3cbdc10>
-
-
+    MSE 100.682191212972
+    
 
 
     
@@ -300,7 +296,7 @@ g.set_xlabels('Noise level')
 
 
 
-    <seaborn.axisgrid.FacetGrid at 0x1c4c22285b0>
+    <seaborn.axisgrid.FacetGrid at 0x26b67f36a30>
 
 
 
@@ -324,7 +320,7 @@ g.set(ylim = (0, 10))
 
 
 
-    <seaborn.axisgrid.FacetGrid at 0x1c4c42bed30>
+    <seaborn.axisgrid.FacetGrid at 0x26b67f5cb80>
 
 
 
