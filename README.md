@@ -91,14 +91,14 @@ for i, q in enumerate(sigma):
 ```
 
 Beispiel von Gruppe 1 (hoch Detailgrad):
-![[output_7_0.png]]
+![](output_7_0.png)
 ![[output_7_1.png]]
 
 Beispiel von Gruppe 2 (mittel Detailgrad):           
-![[output_8_0.png]]
+![](output_8_0.png)
 
 Beispiel von Gruppe 3 (wenig Detailgrad):  
-![[output_8_1.png]]
+![](output_8_1.png)
 
 Nach dem Experiment können wir die Ergebnisse der drei Gruppen vergleichen und den Einfluss der Details Anzahl im Originalbild beobachten. Gleichzeitig vergleichen wir auch das Originalbild und das Anime Bild, um die Auswirkungen der Anime-Konvertierung zu beobachten.
 
