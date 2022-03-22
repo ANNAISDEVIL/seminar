@@ -39,7 +39,7 @@ Um den Detailgrad zu definieren, haben wir zwei Forschungslinien verfolgt: In ei
 **Abhängig Variablen:**
 Wahrgenommene Bildqualität 
 - Für jedes Bild 12 verschiedene Formen -> 6 aus dem Originalbild und 6 aus dem Anime-Bild
-- Für jede Gruppe haben wir 10 Bildern -> $3\cdot10\cdot12=360$
+- Für jede Gruppe haben wir 10 Bildern -> $3*10*12=360$
 - Also insgesamt 360 Durchgänge
 
 ### 2.2 Vorbereitung
@@ -67,19 +67,16 @@ plt.axis('off')
 plt.imshow(im_anime)
 ```
 
-    MSE 100.682191212972
-    
 
 
 
-
-    <matplotlib.image.AxesImage at 0x1c4c281e820>
+    <matplotlib.image.AxesImage at 0x1c4c3cbdc10>
 
 
 
 
     
-![png](output_6_2.png)
+![png](output_6_1.png)
     
 
 
@@ -303,7 +300,7 @@ g.set_xlabels('Noise level')
 
 
 
-    <seaborn.axisgrid.FacetGrid at 0x1c4c1f89a00>
+    <seaborn.axisgrid.FacetGrid at 0x1c4c22285b0>
 
 
 
@@ -327,7 +324,7 @@ g.set(ylim = (0, 10))
 
 
 
-    <seaborn.axisgrid.FacetGrid at 0x1c4c1ebfc40>
+    <seaborn.axisgrid.FacetGrid at 0x1c4c42bed30>
 
 
 
