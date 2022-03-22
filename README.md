@@ -56,8 +56,53 @@ Wir wählen Originalbilder mit unterschiedlichen Anzahl von Einzelheiten aus und
 - Gruppe 2: Fotos mit mittleren Details (Datei zwischen 300 kb und 418 kb)
 - Gruppe 3: Fotos mit nur wenigen Details (Datei kleiner als 187 kb)
 
+```python
+# import dataset and convert it into a format that is convenient for drawing
+Dataset = pd.read_csv('size.csv')
+group = Dataset.groupby(['filesize','Difference']).agg('mean').reset_index()
+group1 = Dataset['filesize']
+
+# draw a one-dimensional scatter plot
+def plot_one_dim(x, xLabel=None, yLabel=None, color=None):
+    
+    C = max(x) - min(x)
+    fig = plt.figure(figsize=(20, 2))     
+    N = len(x)
+    # Assign a value of 0 to the Y coordinate
+    y = np.zeros(N)    
+    
+    # draw scatter
+    ax = fig.add_subplot(111, frameon=True, yticks=[])    
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+
+    ax.scatter(x,y,c=color)
+    ax.yaxis.set_ticks_position('left')
+        
+    # Display 0 of y coordinate as yLabel
+    if yLabel is not None:
+        plt.yticks([0],[yLabel])
+    
+    # Display xLabel
+    if xLabel is not None:
+        ax.set(xlabel=xLabel)
+    
+    # Set the y-axis range
+    plt.ylim((-1, 1))   
+    plt.title("To divide 3 Groups", loc='center', fontsize=15, fontweight=0)
+    plt.show()
+
+# set style
+plt.style.use('seaborn-darkgrid')
+plot_one_dim(group1.values, "filesize", "point","c")
+```
+
 
 ![](https://s2.loli.net/2022/03/22/oF17wYDA8iWgVrf.png)
+
+Um den Unterschied zwischen dem Original Bild und dem Anime-Bild nach dem AnimeGAN zu verstehen, haben wir den mittleren quadratischen Fehler (MSE) zwischen dem Originalbild und dem Anime-Bild berechnet.
+
 
 Wir fügen jedem Original und Anime Bild 5 bis 45 Geräusche hinzu:
 
@@ -132,9 +177,6 @@ g.set_xlabels('Noise level')
 
 
 ![png](output_9_1.png)
-
-
-fenxi
 
 
 ```python
