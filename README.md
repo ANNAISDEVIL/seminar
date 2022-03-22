@@ -58,7 +58,6 @@ def mse(im1, im2):
     N = im_original.size 
     return (1.0/N)*np.sum((im1 - im2)**2)
 print('MSE', mse(im_original, im_anime))
-
 plt.figure()
 plt.subplot(1,2,1)
 plt.axis('off')
@@ -74,7 +73,7 @@ plt.imshow(im_anime)
 
 
 
-    <matplotlib.image.AxesImage at 0x1c4c3f16e20>
+    <matplotlib.image.AxesImage at 0x1c4c281e820>
 
 
 
@@ -114,7 +113,6 @@ def show_2cuts(im1, im2):
     difference = mean1 - mean2
     print("Difference",difference)
     return difference
-
 delta = show_2cuts(im_original, im_anime)
 ```
 
@@ -140,7 +138,6 @@ plt.imshow(im_original)
 plt.subplot(1,2,2)
 plt.axis('off')
 plt.imshow(im_animex)
-
 newdelta = show_2cuts(im_original, im_animex)
 print(newdelta)
 ```
@@ -219,6 +216,7 @@ plot_one_dim(group1.values, "filesize", "point","c")
     
 ![png](output_12_0.png)
     
+
 
 
 ![](divide3.png)
@@ -358,3 +356,4 @@ Da wir einen Unterschied in Abängigkeit vom Bildmaterial gefunden haben, stellt
 
 ### Referenzen
 - https://huggingface.co/spaces/akhaliq/AnimeGANv2
+- Charrier et al. (2007). Maximum likelihood difference scaling of image quality in compression-degraded images. JOSA 24 (11): 3418-26
