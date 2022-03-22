@@ -31,7 +31,8 @@ Unterscheidet sich der Effekt von weißem Rauschen auf die wahrgenommene Bildqua
 
 Um den Detailgrad zu definieren, haben wir zwei Forschungslinien verfolgt: In eine Richtung, Detailgrad verringert sich durch Anime-Konvertierung. Darüber haben wir vermutet, Die Bewertung des Anime ist höher als das Originalbild unter dem gleichen Rauschen im Liniendiagramm jeder Gruppe. In ein andere Richtung, ein Bild kann weniger Details enthalten. Mit anderen Worten, jedes Bild hat einen anderen Detailgrad. Und wir denken, die Bewertung der Gruppe mit einem hohen Detailgrad bei gleichem Rauschlevel schlechter als eine Gruppe mit einem geringen Detailgrad ist. Weil je mehr Details die Originalbilder haben, desto mehr Details gehen bei der Konvertierung verloren, daraus folgt eine schlechter Bewertung.
 
-![](https://s2.loli.net/2022/03/22/y6cz5NOHRFDnVdY.png)
+![](https://s2.loli.net/2022/03/22/4M9jZfDvHxRPI6h.png)
+
 
 
 ## 2. Versuchsplan
@@ -58,6 +59,7 @@ Wir wählen Originalbilder mit unterschiedlichen Anzahl von Einzelheiten aus und
 
 ![](https://s2.loli.net/2022/03/22/oF17wYDA8iWgVrf.png)
 
+Wir fügen jedem Original und Anime Bild 5 bis 45 Geräusche hinzu:
 
 ```python
 original = Image.open('orig1p6.png')
@@ -88,6 +90,17 @@ for i, q in enumerate(sigma):
     plt.title('noise = %d' % q)
 ```
 
+Beispiel von Gruppe 1 (hoch Detailgrad):
+![[output_7_0.png]]
+![[output_7_1.png]]
+
+Beispiel von Gruppe 2 (mittel Detailgrad):           
+![[output_8_0.png]]
+
+Beispiel von Gruppe 3 (wenig Detailgrad):  
+![[output_8_1.png]]
+
+Nach dem Experiment können wir die Ergebnisse der drei Gruppen vergleichen und den Einfluss der Details Anzahl im Originalbild beobachten. Gleichzeitig vergleichen wir auch das Originalbild und das Anime Bild, um die Auswirkungen der Anime-Konvertierung zu beobachten.
 
 
 ## 3. Ergebnisse
