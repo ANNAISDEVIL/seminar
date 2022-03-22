@@ -30,6 +30,7 @@ Unterscheidet sich der Effekt von weißem Rauschen auf die wahrgenommene Bildqua
 ## 1.1. Hypothese
 
 Um den Detailgrad zu definieren, haben wir zwei Forschungslinien verfolgt: In eine Richtung, Detailgrad verringert sich durch Anime-Konvertierung. Darüber haben wir vermutet, Die Bewertung des Anime ist höher als das Originalbild unter dem gleichen Rauschen im Liniendiagramm jeder Gruppe. In ein andere Richtung, ein Bild kann weniger Details enthalten. Mit anderen Worten, jedes Bild hat einen anderen Detailgrad. Und wir denken, die Bewertung der Gruppe mit einem hohen Detailgrad bei gleichem Rauschlevel schlechter als eine Gruppe mit einem geringen Detailgrad ist. Weil je mehr Details die Originalbilder haben, desto mehr Details gehen bei der Konvertierung verloren, daraus folgt eine schlechter Bewertung.
+
 ![](https://s2.loli.net/2022/03/22/y6cz5NOHRFDnVdY.png)
 
 
@@ -50,15 +51,41 @@ Wahrgenommene Bildqualität
 ### 2.2 Vorbereitung
 Wir wählen Originalbilder mit unterschiedlichen Anzahl von Einzelheiten aus und wandeln sie in Animation um. Nach der Gruppenverteilung merken wir uns, dass die Bilder in einer Gruppe sind, sich in einem bestimmten Bereich von Dateigrößen liegen. Deshalb haben wir die Bilder in 3 Gruppen eingeteilt:
 
-Gruppe 1: Fotos mit vielen Details (Datei größer als 500 kb)
-Gruppe 2: Fotos mit mittleren Details (Datei zwischen 300 kb und 418 kb)
-Gruppe 3: Fotos mit nur wenigen Details (Datei kleiner als 187 kb)
+- Gruppe 1: Fotos mit vielen Details (Datei größer als 500 kb)
+- Gruppe 2: Fotos mit mittleren Details (Datei zwischen 300 kb und 418 kb)
+- Gruppe 3: Fotos mit nur wenigen Details (Datei kleiner als 187 kb)
+
 
 ![](https://s2.loli.net/2022/03/22/oF17wYDA8iWgVrf.png)
 
 
 ```python
+original = Image.open('orig1p6.png')
+anime = Image.open('anig1p6.png')
+im_original = np.array(original)
+im_anime = np.array(anime)
 
+sigma = [5, 15, 25, 35, 45]
+
+plt.figure(figsize=(16, 8))
+for i, q in enumerate(sigma):
+    noise = np.random.normal(loc=0, scale=q, size=im_original.shape)
+    im_e1 = im_original + noise 
+    im_e1 = im_e1.astype('uint8')
+    plt.subplot(1,5,i+1)
+    plt.imshow(im_e1)
+    plt.axis('off')
+    plt.title('noise = %d' % q)
+
+plt.figure(figsize=(16, 8))
+for i, q in enumerate(sigma):
+    noise = np.random.normal(loc=0, scale=q, size=im_original.shape)
+    im_e2 = im_anime + noise
+    im_e2 = im_e2.astype('uint8')
+    plt.subplot(1,5,i+1)
+    plt.imshow(im_e2)
+    plt.axis('off')
+    plt.title('noise = %d' % q)
 ```
 
 
