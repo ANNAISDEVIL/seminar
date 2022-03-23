@@ -31,15 +31,9 @@ Um den Detailgrad zu definieren, haben wir zwei Forschungslinien verfolgt: In ei
 ## 2. Versuchsplan
 
 ### 2.1 Variablen und Versuchsbedingung
-**Unabhängig Variablen:**
-1. 5 Stufen weißes Rauschen: 5,15,25,35,45
-2. 3 Gruppen von Bildern: viele Einzelheiten, mäßige viele Einzelheite, wenige Einzelheiten
-3. 2 Typen von Bildern: Original & Anime
+Für Unabhängige Variablen haben wir zunächst 5 Stufen weißes Rauschen mit den Stufen 5, 15, 25, 35, 45. Gefolgt von 3 Gruppen von Bildern: viele Einzelheiten (zum Beispiel Menschliches Gesicht), Fotos mit mittlerer Details (zum Beispiel Landschaft) und Fotos mit nur wenigen Details (Das Meer, einfache Grafik). Schließlich gibt es noch zwei Typen von Bildern, Original und Anime. Die abhängigen Variablen sind wahrgenommene Bildqualität.
 
-**Abhängig Variablen:**
-Wahrgenommene Bildqualität 
-- Für jedes Bild 12 verschiedene Formen -> 6 aus dem Originalbild und 6 aus dem Anime-Bild
-- Für jede Gruppe haben wir 10 Bildern -> 3 mal 10 mal 12 gleich 360 Durchgänge
+Daher gibt es für jedes Bild 12 verschiedene Formen, nämlich 6 aus dem Originalbild und 6 aus dem Anime-Bild. Für jede Gruppe haben wir 10 Bilder, deshalb insgesant haben wir 360 durchgänge.
 
 ### 2.2 Vorbereitung
 Um den Unterschied zwischen dem Originalbild und dem Anime-Bild nach AnimeGAN zu quantifizieren, haben wir den mittleren quadratischen Fehler (MSE) zwischen dem Originalbild und dem Anime-Bild berechnet.Die beiden folgenden Bilder haben beispielsweise einen MSE-Wert von 100,68:
@@ -273,6 +267,13 @@ Beispiel von Gruppe 1 (hoch Detailgrad):
 ![](output_7_0.png)
 ![](output_7_1.png)
 
+Zu Beginn des Experiments erhalten die Teilnehmer eine Anleitung, die testpersonen wird ein Standard gezeigt.
+Dies ermöglicht den testpersonen einen einheitlichen Maßstab bei der Beurteilung. Ishihara color test wird auch benutztm um farbenblinde Tester auszuschließen.
+
+Jedes Bild wird alleine bewertet, und die Testreihenfolge der 360 Bilder sollte zufällig sein. Damit die Teilnehmer genauere Daten beschreiben können, wird 10-stufige MOS-Bewertungsskala benutzt.
+
+![](anleitung.jpg)
+
 ## 3. Ergebnisse
 
 Die folgende Abbildung zeigt die Wahrnehmungsskalen für unsere Stimuli und zwei Beobachter (der Autor und ein naiver Teilnehmer).
@@ -334,18 +335,67 @@ g.set(ylim = (0, 10))
 
 
 ```python
+# for an ANOVA we need the python module statsmodels (statistical models)
+import statsmodels.api as sm  
 
+# the particular function we need is called ols()
+# (ols: ordinary least squares, that is the type of fitting)
+from statsmodels.formula.api import ols 
+
+# we need to set up a 'formula' for the model. This formula is similar to the syntax in R.
+
+# on the left side of the tilde we put the dependent variable
+# on the right side of the tilde we state the independent variables 
+# the C( )  indicates that we consider the variable as a categorical variable (and not continuous)
+# the sign + is not a sum, it is to indicate more than one variable.
+# the sign * is not a multiplication, it is to indicate we want to also model interactions between the variables
+
+# we call ols() passing the model 'formula'
+mod = ols('response ~ C(group) * C(noise) * C(type)',data=newdata)
+
+# we fit the model
+fit = mod.fit()
+
+# we show the ANOVA table
+sm.stats.anova_lm(fit)
 ```
+Wir verwenden ANOVA, um zu analysieren, ob es einen signifikanten Unterschied zwischen allen Daten gibt.
 
-## 5. Diskussion
+Auf der linken Seite der Abbildung unten sehen wir drei Gruppen von unabhängigen Variablen, sie sind C(group), C(noise) und C(type). Die rechte Spalte zeigt den entsprechenden p-Wert. Ein p-Wert kleiner als 0,05 (bei 95 %) verwirft allgemeine Hypothese, Das bedeutet, es gibt doch einen Unterschied.
 
-Wir stellen fest, dass die Wahrnehmungsskalen für beide Beobachter flach (oder leicht negativ) sind bis zu einem Verzerrung von 60 - 80 (Qualität von 20 - 40). Die Flachheit der Skala in diesem Bereich deutet darauf hin, dass die wahrgenommene Verschlechterung der Bildqualität nicht spürbar ist. Bei Degradationswerten höher als 60 - 80 (Qualität niedriger als 20 - 40) steigen die Wahrnehmungsskalen monoton an, was darauf hinweist, dass die Bildqualität abnimmt und dies von den Beobachtern wahrgenommen wird. Diese Ergebnisse stimmen mit unserem informellen subjektiven Eindruck von Qualitätsverschlechterung überein, wenn man die erste Abbildung oben betrachtet.
+Wir können also sehen, dass es für die Variablen "group" und "noise" Unterschiede gibt, weil p-Wert<0,05, was auch dem Bild im dritten Absatz "Ergebnisse" entspricht. Für die Variable "type", p-Wert > 0,05, d. h. es gibt keinen Unterschied. Dies entspricht auch dem Bild im dritten Absatz „Ergebnisse“.
+
+![png](anova.jpg)
+
+## 5. Interpretation
+
+In Fragestellung stellen wir die Frage: Unterscheidet sich der Effekt von weißem Rauschen auf die übernommene Bildqualität zwischen Originalbildern und Animes dieser Bilder?
+
+Basierend auf dieser Frage schlagen wir zwei weitere Hypothesen vor:
+
+1. Die Bewertung der Gruppe mit einem hohen Detailgrad bei gleichem Rauschlevel ist schlechter als eine Gruppe mit einem einfachen Detailgrad.
+
+2. Die Bewertung des Anime ist höher als das Originalbild unter dem gleichen Rauschen im Liniendiagramm jeder Gruppe.
+
+Jetzt werden wir überprüfen, ob unsere Hypothese gilt.
+
+Als wir das Experiment durchgeführt haben, haben wir auch festgestellt, dass das Bild mit weniger Details (Gruppe 3) einen schlechteren Effekt hat, nachdem weißes Rauschen hinzugefügt wurde. Dies ist genau das Gegenteil unserer ersten Hypothese. Die erste Annahme trifft also nicht zu.
+
+![png](1648054297844.jpg)
+
+Vorher haben wir geahnt, If Animes less for menschliche Wahrnehmung wichtige Details enthalten, hat weißes Rauschen in Animes einen geringeren Einfluss auf die wahrgenommene Bildqualität als in den Originalbildern, aber aus den experimentellen Daten geht hervor, dass auch das falsch ist. Gemäß den Ergebnissen von ANOVA ist ersichtlich, dass die Anzahl der Details zwischen Anime und Ori keinen Einfluss auf das Hinzufügen von weißem Rauschen hat.
+
+![png](1648054315924.jpg)
+
+Daher können wir durch dieses Experiment ein Fazit ziehen: Die Menge an Detailinformationen, die im Bild selbst enthalten sind, hat einen Einfluss auf den Rauscheffekt. Aber weißes Rauschen wirkt sich jedoch nicht auf die Anzahl der Details zwischen Anime und origniale Bildern aus.
 
 ### Mögliche Probleme 
-Eine klare Einschränkung in unserer Arbeit ist die Tatsache, dass wir eine begrenzte Anzahl von Stimuli verwendet haben. Wir haben nur ein Bild pro Kategorie verwendet, wir haben die Wahrnehmungsskalen für nur zwei Beobachter gemessen. 
 
-### Offene Fragen
-Da wir einen Unterschied in Abängigkeit vom Bildmaterial gefunden haben, stellt sich nun die Frage, wie sich die Komprimierung auf andere Arten von Bildern (z. B. Landschaften, Kunstwerke) auswirkt. Eine weitere Frage betrifft die Variabilität zwischen den Beobachtern. Es müsste eine grössere Anzahl von Teilnehmern untersucht werden.
+Wir sind während des Experiments auch auf viele Probleme gestoßen, darunter: Die Testperson berichtete, dass die Testzeit zu lang war. Oder noch einmal,
+Der Tester wusste den Fortschritt des Experiments nicht und bestimmt sich mittendrin erschöpft.
+
+Wir schlagen auch verbesserte Methoden vor, wie z. B. Fügen dem Testprogramm einen Fortschrittsbalken hinzu, oder
+Fügen Sie der Testseite einen Timer hinzu.
 
 ### Referenzen
 - https://huggingface.co/spaces/akhaliq/AnimeGANv2
