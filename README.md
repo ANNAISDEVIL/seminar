@@ -399,4 +399,8 @@ Fügen Sie der Testseite einen Timer hinzu.
 
 ### Referenzen
 - https://huggingface.co/spaces/akhaliq/AnimeGANv2
-- Charrier et al. (2007). Maximum likelihood difference scaling of image quality in compression-degraded images. JOSA 24 (11): 3418-26
+- https://xerrors.fun/anime-gan-note/
+- https://stefan.winkler.site/resources.html
+- http://database.mmsp-kn.de/iqa-experts-300.html
+- http://database.mmsp-kn.de/koniq-10k-database.html
+- https://en.wikipedia.org/wiki/Ishihara_test
