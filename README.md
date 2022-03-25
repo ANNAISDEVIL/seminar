@@ -380,10 +380,11 @@ Basierend auf dieser Frage schlagen wir zwei weitere Hypothesen vor:
 Jetzt werden wir überprüfen, ob unsere Hypothese gilt.
 
 Als wir das Experiment durchgeführt haben, haben wir auch festgestellt, dass das Bild mit weniger Details (Gruppe 3) einen schlechteren Effekt hat, nachdem weißes Rauschen hinzugefügt wurde. Dies ist genau das Gegenteil unserer ersten Hypothese. Die erste Annahme trifft also nicht zu.
+Als Grund für dieses Phänomen, denken wir: Die Anzahl der im Originalbild enthaltenen Details spielt eine führende Rolle bei der menschlichen Wahrnehmung des Bildinhalts. Selbst wenn das Hinzufügen von Rauschen die Erkennung stört, beurteilen die Menschen die Bildqualität immer noch auf der Grundlage der erkannten Details, ohne eine schlechtere Wertung wegen größerem Detailverlust zu vergeben.
 
 ![png](1648054297844.jpg)
 
-Vorher haben wir geahnt, If Animes less for menschliche Wahrnehmung wichtige Details enthalten, hat weißes Rauschen in Animes einen geringeren Einfluss auf die wahrgenommene Bildqualität als in den Originalbildern, aber aus den experimentellen Daten geht hervor, dass auch das falsch ist. Gemäß den Ergebnissen von ANOVA ist ersichtlich, dass die Anzahl der Details zwischen Anime und Ori keinen Einfluss auf das Hinzufügen von weißem Rauschen hat.
+Vorher haben wir geahnt, Anime-Bilder weniger für menschliche Wahrnehmung wichtige Details enthalten, hat weißes Rauschen in Animes einen geringeren Einfluss auf die wahrgenommene Bildqualität als in den Originalbildern, aber aus den experimentellen Daten geht hervor, dass auch das falsch ist. Gemäß den Ergebnissen von ANOVA ist ersichtlich, dass die Anzahl der Details zwischen Anime und Ori keinen Einfluss auf das Hinzufügen von weißem Rauschen hat.
 
 ![png](1648054315924.jpg)
 
